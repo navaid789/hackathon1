@@ -9,7 +9,7 @@ const config = {
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://your-username.github.io',
+  url: 'https://hackathon1-git-main-navaid789.vercel.app', // Vercel deployment URL
   // Set the /<base>/ pathname under which your site is served
   // For GitHub Pages: https://<USERNAME>.github.io/<REPO>/
   baseUrl: '/',
@@ -44,7 +44,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/physical-ai-project/physical-ai-humanoid-textbook/edit/main/',
+            'https://github.com/navaid789/hackathon1/edit/main/',
         },
         blog: false, // Disable blog if not needed
         theme: {
@@ -73,7 +73,7 @@ const config = {
             label: 'Textbook',
           },
           {
-            href: 'https://github.com/your-org-name/physical-ai-humanoid-textbook',
+            href: 'https://github.com/navaid789/hackathon1',
             label: 'GitHub',
             position: 'right',
           },
@@ -113,7 +113,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/your-org-name/physical-ai-humanoid-textbook',
+                href: 'https://github.com/navaid789/hackathon1',
               },
             ],
           },
