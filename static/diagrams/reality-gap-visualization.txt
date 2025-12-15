@@ -1,0 +1,8 @@
+Placeholder for Reality Gap Visualization diagram
+This would visualize the differences between simulation and real-world conditions:
+- Dynamics mismatch
+- Sensor noise variations
+- Environmental factors
+- Latency differences
+- Modeling inaccuracies
+- Transfer strategies

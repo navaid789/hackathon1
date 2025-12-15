@@ -1,0 +1,5 @@
+Placeholder for Gazebo vs Unity Comparison diagram
+This would show comparative visualization of Gazebo and Unity simulation environments:
+- Gazebo: Native ROS integration, physics-focused, robotics applications
+- Unity: High-fidelity graphics, game engine features, synthetic data generation
+- Use cases, performance characteristics, and integration options

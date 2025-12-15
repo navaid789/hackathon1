@@ -1,0 +1,8 @@
+Placeholder for Sim-to-Real Transfer diagram
+This would show the framework for sim-to-real transfer:
+- Domain randomization techniques
+- System identification methods
+- Reality gap mitigation strategies
+- Sensor calibration and fusion
+- Deployment considerations
+- Validation and testing procedures

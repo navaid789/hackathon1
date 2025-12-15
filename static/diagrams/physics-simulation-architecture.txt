@@ -1,0 +1,7 @@
+Placeholder for Physics Simulation Architecture diagram
+This would be a detailed diagram showing physics simulation components:
+- Simulation engine
+- Physics solver
+- Collision detection system
+- Sensor simulation modules
+- Integration with robotics middleware

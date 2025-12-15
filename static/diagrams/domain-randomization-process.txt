@@ -1,0 +1,8 @@
+Placeholder for Domain Randomization Process diagram
+This would show the domain randomization process for improving sim-to-real transfer:
+- Parameter randomization (mass, friction, lighting, etc.)
+- Environment variation
+- Training with diverse conditions
+- Policy robustness improvement
+- Validation in real conditions
+- Adaptive randomization strategies

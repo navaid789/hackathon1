@@ -1,0 +1,8 @@
+Placeholder for Humanoid Intelligence Architecture diagram
+This would show the proposed architecture for scaling humanoid intelligence:
+- Hierarchical control systems
+- Multi-modal integration
+- Memory and learning systems
+- Sensorimotor coordination
+- High-level reasoning and planning
+- Safety and ethical reasoning modules

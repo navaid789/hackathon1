@@ -1,0 +1,264 @@
+openapi: 3.0.0
+info:
+  title: Physical AI Textbook RAG Chatbot API
+  description: API for the Retrieval-Augmented Generation chatbot integrated with the Physical AI & Humanoid Robotics textbook
+  version: 1.0.0
+  contact:
+    name: Physical AI Textbook Team
+    email: textbook@physical-ai.org
+
+servers:
+  - url: https://api.physical-ai-textbook.com/v1
+    description: Production server
+  - url: https://staging-api.physical-ai-textbook.com/v1
+    description: Staging server
+
+paths:
+  /chat:
+    post:
+      summary: Send a message to the textbook RAG chatbot
+      description: Submit a query to the RAG system which will respond based only on textbook content
+      operationId: chatWithTextbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response from the chatbot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /search:
+    post:
+      summary: Search textbook content
+      description: Search the textbook content for relevant passages
+      operationId: searchTextbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results from textbook content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Invalid search request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /validate-response:
+    post:
+      summary: Validate chatbot response for grounding
+      description: Check if a response is properly grounded in textbook content
+      operationId: validateResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/ValidateRequest'
+      responses:
+        '200':
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - context
+      properties:
+        message:
+          type: string
+          description: The user's message or question
+          example: "Explain how ROS 2 handles real-time constraints"
+        context:
+          type: string
+          description: The selected text context from the textbook (optional)
+          example: "ROS 2 architecture includes real-time constraints..."
+        user_id:
+          type: string
+          description: Optional user identifier for personalization
+        chapter_filter:
+          type: string
+          description: Optional filter to limit search to specific chapter
+
+    ChatResponse:
+      type: object
+      required:
+        - response
+        - sources
+        - grounded
+      properties:
+        response:
+          type: string
+          description: The chatbot's response to the user
+        sources:
+          type: array
+          items:
+            type: string
+          description: List of textbook sections/chapters used as sources
+        grounded:
+          type: boolean
+          description: Whether the response is properly grounded in textbook content
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Confidence score for the response
+
+    SearchRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query
+          example: "sim-to-real transfer challenges"
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 20
+          default: 5
+          description: Maximum number of results to return
+        chapter_filter:
+          type: string
+          description: Optional filter to search within specific chapter
+
+    SearchResponse:
+      type: object
+      required:
+        - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        total_count:
+          type: integer
+          description: Total number of results available
+
+    SearchResult:
+      type: object
+      required:
+        - content
+        - chapter
+        - section
+        - relevance_score
+      properties:
+        content:
+          type: string
+          description: The relevant content excerpt
+        chapter:
+          type: string
+          description: The chapter where the content appears
+        section:
+          type: string
+          description: The section within the chapter
+        relevance_score:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Relevance score for the result
+        page_reference:
+          type: string
+          description: Page reference if available
+
+    ValidateRequest:
+      type: object
+      required:
+        - response
+        - sources
+      properties:
+        response:
+          type: string
+          description: The response to validate
+        sources:
+          type: array
+          items:
+            type: string
+          description: Potential sources for the response
+        selected_text:
+          type: string
+          description: Text selected by user (if any)
+
+    ValidateResponse:
+      type: object
+      required:
+        - is_valid
+        - issues
+      properties:
+        is_valid:
+          type: boolean
+          description: Whether the response is properly grounded
+        issues:
+          type: array
+          items:
+            type: string
+          description: List of validation issues found
+        suggestions:
+          type: array
+          items:
+            type: string
+          description: Suggestions for improving grounding
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+
+security:
+  - api_key: []
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: X-API-Key
+    in: header
+    description: API key for authentication
+
+tags:
+  - name: chat
+    description: Chatbot interaction endpoints
+  - name: search
+    description: Textbook content search
+  - name: validation
+    description: Response validation

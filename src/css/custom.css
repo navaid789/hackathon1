@@ -1,0 +1,132 @@
+/**
+ * Copyright (c) 2017-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* You can override the default Docusaurus styling with custom CSS classes */
+
+:root {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-code-font-size: 95%;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styles for Physical AI textbook */
+.physical-ai-intro {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.physical-ai-intro h1 {
+  margin-bottom: 1rem;
+}
+
+.physical-ai-intro p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Styles for chapter objectives */
+.chapter-objectives {
+  background-color: #f8f9fa;
+  border-left: 4px solid #25c2a0;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.chapter-objectives h3 {
+  margin-top: 0;
+}
+
+/* Styles for key concepts */
+.key-concept {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background-color: #f8f9fa;
+}
+
+.key-concept-title {
+  font-weight: bold;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+/* Styles for diagrams and figures */
+.figure {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #6c757d;
+  margin-top: 0.5rem;
+}
+
+/* Academic citation styles */
+.citation {
+  font-size: 0.9rem;
+  color: #6c757d;
+  border-left: 2px solid #6c757d;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+/* Code block enhancements for robotics/ROS content */
+.ros-code {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* Table styling for hardware requirements */
+.hardware-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.hardware-table th,
+.hardware-table td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.hardware-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}

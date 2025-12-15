@@ -1,0 +1,8 @@
+Placeholder for Isaac Sim Architecture diagram
+This would show the architecture of NVIDIA Isaac Sim:
+- Omniverse platform integration
+- PhysX physics engine
+- RTX rendering capabilities
+- ROS/ROS 2 bridge
+- Synthetic data generation pipeline
+- Sensor simulation modules

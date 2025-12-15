@@ -1,0 +1,8 @@
+Placeholder for Synthetic Data Pipeline diagram
+This would show the synthetic data generation pipeline:
+- Domain randomization modules
+- Scene generation with varied parameters
+- Sensor simulation
+- Data annotation and labeling
+- Dataset export for training
+- Quality assurance processes

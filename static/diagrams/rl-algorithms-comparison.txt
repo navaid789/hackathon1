@@ -1,0 +1,8 @@
+Placeholder for RL Algorithms Comparison diagram
+This would compare different reinforcement learning algorithms:
+- DDPG (Deep Deterministic Policy Gradient)
+- TD3 (Twin Delayed DDPG)
+- SAC (Soft Actor-Critic)
+- Applications in robotics
+- Performance characteristics
+- Use cases and limitations
