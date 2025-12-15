@@ -9,7 +9,7 @@ const config = {
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://navaid789.github.io', // Base URL for the site (generic)
+  url: 'https://hackathon1.vercel.app', // Base URL for the site
   // Set the /<base>/ pathname under which your site is served
   // For GitHub Pages: https://<USERNAME>.github.io/<REPO>/
   baseUrl: '/',

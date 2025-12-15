@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "package.json",
@@ -10,14 +11,14 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/^/.*\\.\\w+$/",
+      "handle": "resource"
     },
     {
-      "src": "/^(.*)$",
+      "src": "/(.*)",
       "dest": "/index.html",
       "status": 200
     }
   ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  "cleanUrls": true
 }
