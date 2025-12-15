@@ -11,14 +11,19 @@
   ],
   "routes": [
     {
-      "src": "/^/.*\\.\\w+$/",
-      "handle": "resource"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/^(.*)\\.\\w+$/",
+      "dest": "/$1",
+      "headers": {
+        "cache-control": "max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
       "dest": "/index.html",
       "status": 200
     }
-  ],
-  "cleanUrls": true
+  ]
 }
