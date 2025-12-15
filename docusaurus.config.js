@@ -9,14 +9,14 @@ const config = {
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://hackathon1-git-main-navaid789.vercel.app', // Vercel deployment URL
+  url: 'https://hackathon1.vercel.app', // Vercel deployment URL
   // Set the /<base>/ pathname under which your site is served
   // For GitHub Pages: https://<USERNAME>.github.io/<REPO>/
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  organizationName: 'physical-ai-project', // Usually your GitHub org/user name.
-  projectName: 'physical-ai-humanoid-textbook', // Usually your repo name.
+  // Vercel deployment config.
+  organizationName: 'navaid789', // Your GitHub username
+  projectName: 'hackathon1', // Your repository name
 
   onBrokenLinks: 'throw',
   markdown: {
