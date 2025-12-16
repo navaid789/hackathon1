@@ -207,12 +207,15 @@ export class ConnectionMetricsService {
   // Save metrics to localStorage
   saveToStorage() {
     try {
-      const dataToSave = {
-        sessionData: this.sessionData,
-        globalStats: this.globalStats,
-        lastUpdated: new Date().toISOString()
-      };
-      localStorage.setItem('connectionMetrics', JSON.stringify(dataToSave));
+      // Check if we're in a browser environment (not during SSR)
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const dataToSave = {
+          sessionData: this.sessionData,
+          globalStats: this.globalStats,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem('connectionMetrics', JSON.stringify(dataToSave));
+      }
     } catch (error) {
       console.warn('Could not save connection metrics to localStorage:', error);
     }
@@ -221,11 +224,14 @@ export class ConnectionMetricsService {
   // Load metrics from localStorage
   loadFromStorage() {
     try {
-      const savedData = localStorage.getItem('connectionMetrics');
-      if (savedData) {
-        const parsed = JSON.parse(savedData);
-        this.sessionData = parsed.sessionData || this.sessionData;
-        this.globalStats = parsed.globalStats || this.globalStats;
+      // Check if we're in a browser environment (not during SSR)
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const savedData = localStorage.getItem('connectionMetrics');
+        if (savedData) {
+          const parsed = JSON.parse(savedData);
+          this.sessionData = parsed.sessionData || this.sessionData;
+          this.globalStats = parsed.globalStats || this.globalStats;
+        }
       }
     } catch (error) {
       console.warn('Could not load connection metrics from localStorage:', error);

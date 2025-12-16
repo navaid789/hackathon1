@@ -92,12 +92,15 @@ export class Logger {
       this.logBuffer.push(logEntry);
       this.currentLogSize += entrySize;
 
-      // Save to localStorage
-      localStorage.setItem('appLogs', JSON.stringify({
-        buffer: this.logBuffer,
-        size: this.currentLogSize,
-        lastUpdated: new Date().toISOString()
-      }));
+      // Check if we're in a browser environment (not during SSR)
+      if (typeof window !== 'undefined' && window.localStorage) {
+        // Save to localStorage
+        localStorage.setItem('appLogs', JSON.stringify({
+          buffer: this.logBuffer,
+          size: this.currentLogSize,
+          lastUpdated: new Date().toISOString()
+        }));
+      }
     } catch (error) {
       console.warn('Failed to log to file:', error);
     }
@@ -186,10 +189,13 @@ export class Logger {
   // Get recent logs
   getRecentLogs(count = 50) {
     try {
-      const stored = localStorage.getItem('appLogs');
-      if (stored) {
-        const data = JSON.parse(stored);
-        return data.buffer.slice(-count).map(log => JSON.parse(log));
+      // Check if we're in a browser environment (not during SSR)
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const stored = localStorage.getItem('appLogs');
+        if (stored) {
+          const data = JSON.parse(stored);
+          return data.buffer.slice(-count).map(log => JSON.parse(log));
+        }
       }
     } catch (error) {
       console.warn('Failed to retrieve logs:', error);
@@ -201,7 +207,10 @@ export class Logger {
   clearLogs() {
     this.logBuffer = [];
     this.currentLogSize = 0;
-    localStorage.removeItem('appLogs');
+    // Check if we're in a browser environment (not during SSR)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('appLogs');
+    }
   }
 
   // Set log level
