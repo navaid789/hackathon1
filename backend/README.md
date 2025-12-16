@@ -61,6 +61,26 @@ curl -X POST http://localhost:8000/query \
   }'
 ```
 
+## Running the Application
+
+### For Full RAG Pipeline (requires external services):
+```bash
+# Make sure you have Qdrant running and API keys configured in .env
+uv run main.py
+```
+
+### For Local Development (no external dependencies):
+```bash
+# This starts just the API server for frontend-backend integration
+python main_wrapper.py --local-mode
+```
+
+### Alternative local server startup:
+```bash
+# Direct API server startup
+python run_server.py
+```
+
 ## Testing
 
 Run the tests:
