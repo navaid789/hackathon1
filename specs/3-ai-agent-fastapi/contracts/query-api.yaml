@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: AI Agent Query API
+  description: API for interacting with the AI agent that retrieves book content
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /query:
+    post:
+      summary: Submit a query to the AI agent
+      description: Send a question to the AI agent and receive a response based on book content
+      operationId: queryAgent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response from the AI agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Check if the AI agent service is running and healthy
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-12-16T10:30:00Z"
+
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question about book content
+          example: "What are the main themes in this book?"
+          minLength: 1
+          maxLength: 1000
+        thread_id:
+          type: string
+          description: Optional thread ID to maintain conversation context
+          example: "thread_abc123"
+          pattern: "^thread_[a-zA-Z0-9]+$"
+        metadata:
+          type: object
+          description: Additional context for the query
+          example:
+            source: "web_app"
+            user_id: "user_123"
+
+    QueryResponse:
+      type: object
+      required:
+        - response
+        - thread_id
+        - timestamp
+      properties:
+        response:
+          type: string
+          description: The agent's answer to the user's question
+          example: "The main themes in this book include..."
+          minLength: 1
+          maxLength: 10000
+        sources:
+          type: array
+          description: List of sources used to generate the response
+          items:
+            $ref: '#/components/schemas/SourceReference'
+          maxItems: 10
+        thread_id:
+          type: string
+          description: Thread identifier for conversation continuity
+          example: "thread_abc123"
+          pattern: "^thread_[a-zA-Z0-9]+$"
+        timestamp:
+          type: string
+          format: date-time
+          description: When the response was generated
+          example: "2025-12-16T10:30:00Z"
+
+    SourceReference:
+      type: object
+      required:
+        - url
+        - section
+        - text
+        - relevance_score
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL where the content was originally sourced from
+          example: "https://example.com/book/chapter1"
+        section:
+          type: string
+          description: Section or chapter where the content appears
+          example: "Chapter 1"
+          minLength: 1
+          maxLength: 200
+        text:
+          type: string
+          description: The actual text content that was referenced
+          example: "This is a relevant excerpt from the book..."
+          minLength: 1
+          maxLength: 5000
+        relevance_score:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Similarity score between 0-1 indicating relevance
+          example: 0.85
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+          example: "query_processing_error"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Failed to process query due to internal error"

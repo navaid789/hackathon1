@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Query API",
+    "version": "1.0.0",
+    "description": "API for sending user queries to the AI agent and receiving responses"
+  },
+  "paths": {
+    "/query": {
+      "post": {
+        "summary": "Send a query to the AI agent",
+        "description": "This endpoint allows the frontend to send user queries to the AI agent and receive responses. It supports both general queries and context-aware queries where selected text is provided as additional context.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The user's question or query text",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "Selected text from the book that provides context",
+                    "maxLength": 5000
+                  },
+                  "thread_id": {
+                    "type": "string",
+                    "description": "Identifier for maintaining conversation context"
+                  }
+                },
+                "required": ["query"]
+              },
+              "example": {
+                "query": "What are the main themes in this book?",
+                "context": "The author explores themes of identity and belonging throughout the narrative...",
+                "thread_id": "thread_abc123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response from the AI agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "description": "The AI-generated answer text"
+                    },
+                    "sources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "URL or identifier of the source document"
+                          },
+                          "section": {
+                            "type": "string",
+                            "description": "Specific section or heading within the document"
+                          },
+                          "text": {
+                            "type": "string",
+                            "description": "Snippet of the referenced text"
+                          },
+                          "confidence": {
+                            "type": "number",
+                            "description": "Confidence score of the source relevance (0-1)",
+                            "minimum": 0,
+                            "maximum": 1
+                          }
+                        },
+                        "required": ["url"]
+                      },
+                      "maxItems": 10
+                    },
+                    "thread_id": {
+                      "type": "string",
+                      "description": "Identifier for the conversation thread"
+                    },
+                    "query_id": {
+                      "type": "string",
+                      "description": "Unique identifier for this query-response pair"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "When the response was generated"
+                    }
+                  },
+                  "required": ["response", "thread_id", "query_id", "timestamp"]
+                },
+                "example": {
+                  "response": "The main themes in this book include identity, belonging, and personal growth. The author explores these concepts through character development and narrative structure.",
+                  "sources": [
+                    {
+                      "url": "https://example.com/book/chapter1",
+                      "section": "Chapter 1: Introduction",
+                      "text": "The author explores themes of identity and belonging throughout the narrative...",
+                      "confidence": 0.85
+                    }
+                  ],
+                  "thread_id": "thread_abc123",
+                  "query_id": "query_def456",
+                  "timestamp": "2025-12-16T10:30:00Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid request format or missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message explaining what went wrong"
+                    },
+                    "details": {
+                      "type": "object",
+                      "description": "Additional details about the error"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Query is required and cannot be empty",
+                  "details": {
+                    "field": "query",
+                    "code": "missing_required_field"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message explaining what went wrong"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal server error occurred while processing the request"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
