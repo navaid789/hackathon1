@@ -1,29 +1,7 @@
 ---
-id: 3-frontend-backend-integration
-title: "Frontend-Backend Integration Tasks"
-stage: "tasks"
-date: "2025-12-16"
-surface: "agent"
-model: "Claude Sonnet 4.5"
-feature: "1-frontend-backend-integration"
-branch: "1-frontend-backend-integration"
-user: "user"
-command: "/sp.tasks"
-labels: ["tasks", "frontend", "backend", "integration", "api", "ui"]
-links:
-  spec: "specs/1-frontend-backend-integration/spec.md"
-  plan: "specs/1-frontend-backend-integration/plan.md"
-  tasks: "specs/1-frontend-backend-integration/tasks.md"
-  data-model: "specs/1-frontend-backend-integration/data-model.md"
-  contracts: "specs/1-frontend-backend-integration/contracts/query-api-contract.json"
-files:
-  - "specs/1-frontend-backend-integration/tasks.md"
-  - "specs/1-frontend-backend-integration/plan.md"
-  - "specs/1-frontend-backend-integration/spec.md"
-  - "specs/1-frontend-backend-integration/data-model.md"
-  - "specs/1-frontend-backend-integration/contracts/query-api-contract.json"
-  - "specs/1-frontend-backend-integration/research.md"
-tests: []
+name: "Frontend-Backend Integration Tasks"
+model: "claude-sonnet-4-5-20250929"
+description: "Generate implementation tasks for integrating the RAG backend with the frontend book interface, including API client implementation, UI components, and connection management."
 ---
 
 # Prompt History Record: Frontend-Backend Integration Tasks

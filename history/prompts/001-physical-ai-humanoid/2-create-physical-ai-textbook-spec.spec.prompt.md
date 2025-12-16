@@ -1,25 +1,7 @@
 ---
-id: 2
-title: Create Physical AI Textbook Spec
-stage: spec
-date: 2025-12-13
-surface: agent
+name: Create Physical AI Textbook Spec
 model: claude-sonnet-4-5-20250929
-feature: 001-physical-ai-humanoid
-branch: 001-physical-ai-humanoid
-user: nm
-command: /sp.specify
-labels: ["physical-ai","robotics","textbook","specification"]
-links:
-  spec: specs/001-physical-ai-humanoid/spec.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/001-physical-ai-humanoid/spec.md
- - specs/001-physical-ai-humanoid/checklists/requirements.md
-tests:
- - none
+description: Create comprehensive specification for Physical AI & Humanoid Robotics textbook with user scenarios, functional requirements, and success criteria.
 ---
 
 ## Prompt

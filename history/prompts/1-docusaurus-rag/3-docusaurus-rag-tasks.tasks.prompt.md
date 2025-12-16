@@ -1,24 +1,7 @@
 ---
-id: 3
-title: docusaurus-rag-tasks
-stage: tasks
-date: 2025-12-15
-surface: agent
+name: docusaurus-rag-tasks
 model: claude-sonnet-4-5-20250929
-feature: 1-docusaurus-rag
-branch: 1-docusaurus-rag
-user: nm
-command: /sp.tasks
-labels: ["tasks","docusaurus","rag","implementation","planning"]
-links:
-  spec: ../specs/1-docusaurus-rag/spec.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/1-docusaurus-rag/tasks.md
-tests:
- - No automated tests created yet
+description: Generate implementation tasks for Docusaurus RAG pipeline based on specification and plan.
 ---
 
 ## Prompt

@@ -1,23 +1,7 @@
 ---
-id: 1-frontend-backend-integration
-title: "Frontend-Backend Integration Spec"
-stage: "spec"
-date: "2025-12-16"
-surface: "agent"
-model: "Claude Sonnet 4.5"
-feature: "1-frontend-backend-integration"
-branch: "1-frontend-backend-integration"
-user: "user"
-command: "/sp.specify"
-labels: ["spec", "frontend", "backend", "integration", "ai-agent"]
-links:
-  spec: "specs/1-frontend-backend-integration/spec.md"
-  checklist: "specs/1-frontend-backend-integration/checklists/requirements.md"
-files:
-  - "specs/1-frontend-backend-integration/spec.md"
-  - "specs/1-frontend-backend-integration/checklists/requirements.md"
-  - ".specify/templates/spec-template.md"
-tests: []
+name: "Frontend-Backend Integration Spec"
+model: "claude-sonnet-4-5-20250929"
+description: "Create a specification for integrating the RAG backend with the frontend book interface by establishing a local connection, enabling users to query the chatbot directly from the published book."
 ---
 
 # Prompt History Record: Frontend-Backend Integration Spec

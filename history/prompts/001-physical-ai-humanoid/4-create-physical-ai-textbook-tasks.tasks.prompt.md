@@ -1,25 +1,7 @@
 ---
-id: 4
-title: Create Physical AI Textbook Tasks
-stage: tasks
-date: 2025-12-13
-surface: agent
+name: Create Physical AI Textbook Tasks
 model: claude-sonnet-4-5-20250929
-feature: 001-physical-ai-humanoid
-branch: 001-physical-ai-humanoid
-user: nm
-command: /sp.tasks
-labels: ["physical-ai","robotics","textbook","tasks","implementation"]
-links:
-  spec: specs/001-physical-ai-humanoid/spec.md
-  plan: specs/001-physical-ai-humanoid/plan.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/001-physical-ai-humanoid/tasks.md
-tests:
- - none
+description: Generate actionable tasks for Physical AI & Humanoid Robotics textbook implementation based on specification and plan.
 ---
 
 ## Prompt

@@ -1,24 +1,7 @@
 ---
-id: 1
-title: Update Physical AI Constitution
-stage: constitution
-date: 2025-12-13
-surface: agent
+name: Update Physical AI Constitution
 model: claude-sonnet-4-5-20250929
-feature: none
-branch: master
-user: nm
-command: /sp.constitution
-labels: ["constitution","physical-ai","robotics","academic"]
-links:
-  spec: null
-  ticket: null
-  adr: null
-  pr: null
-files:
- - .specify/memory/constitution.md
-tests:
- - none
+description: Create updated constitution for Physical AI & Humanoid Robotics textbook project with comprehensive principles for accuracy, academic rigor, reproducibility, and RAG chatbot constraints.
 ---
 
 ## Prompt

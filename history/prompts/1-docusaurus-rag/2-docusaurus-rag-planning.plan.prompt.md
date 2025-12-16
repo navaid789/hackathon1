@@ -1,28 +1,7 @@
 ---
-id: 2
-title: docusaurus-rag-planning
-stage: plan
-date: 2025-12-15
-surface: agent
+name: docusaurus-rag-planning
 model: claude-sonnet-4-5-20250929
-feature: 1-docusaurus-rag
-branch: 1-docusaurus-rag
-user: nm
-command: /sp.plan
-labels: ["planning","docusaurus","rag","architecture","qdrant","cohere"]
-links:
-  spec: ../specs/1-docusaurus-rag/spec.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/1-docusaurus-rag/plan.md
- - specs/1-docusaurus-rag/research.md
- - specs/1-docusaurus-rag/data-model.md
- - specs/1-docusaurus-rag/quickstart.md
- - specs/1-docusaurus-rag/contracts/interface-contract.md
-tests:
- - No automated tests created yet
+description: Create an implementation plan for extracting content from a deployed Docusaurus site, generating embeddings using Cohere, and storing them in Qdrant Cloud for RAG applications.
 ---
 
 ## Prompt

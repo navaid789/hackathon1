@@ -1,25 +1,7 @@
 ---
-id: 1
-title: docusaurus-rag-specification
-stage: spec
-date: 2025-12-15
-surface: agent
+name: docusaurus-rag-specification
 model: claude-sonnet-4-5-20250929
-feature: 1-docusaurus-rag
-branch: 1-docusaurus-rag
-user: nm
-command: /sp.specify
-labels: ["specification","docusaurus","rag","embeddings","qdrant"]
-links:
-  spec: ../specs/1-docusaurus-rag/spec.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/1-docusaurus-rag/spec.md
- - specs/1-docusaurus-rag/checklists/requirements.md
-tests:
- - No automated tests created yet
+description: Extract content from a deployed Docusaurus site, generate embeddings using Cohere, and store them in Qdrant Cloud for RAG applications.
 ---
 
 ## Prompt

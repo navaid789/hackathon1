@@ -1,30 +1,7 @@
 ---
-id: 2-frontend-backend-integration
-title: "Frontend-Backend Integration Plan"
-stage: "plan"
-date: "2025-12-16"
-surface: "agent"
-model: "Claude Sonnet 4.5"
-feature: "1-frontend-backend-integration"
-branch: "1-frontend-backend-integration"
-user: "user"
-command: "/sp.plan"
-labels: ["plan", "frontend", "backend", "integration", "api", "cors"]
-links:
-  spec: "specs/1-frontend-backend-integration/spec.md"
-  plan: "specs/1-frontend-backend-integration/plan.md"
-  research: "specs/1-frontend-backend-integration/research.md"
-  data-model: "specs/1-frontend-backend-integration/data-model.md"
-  contracts: "specs/1-frontend-backend-integration/contracts/query-api-contract.json"
-  quickstart: "specs/1-frontend-backend-integration/quickstart.md"
-files:
-  - "specs/1-frontend-backend-integration/plan.md"
-  - "specs/1-frontend-backend-integration/research.md"
-  - "specs/1-frontend-backend-integration/data-model.md"
-  - "specs/1-frontend-backend-integration/contracts/query-api-contract.json"
-  - "specs/1-frontend-backend-integration/quickstart.md"
-  - "CLAUDE.md"
-tests: []
+name: "Frontend-Backend Integration Plan"
+model: "claude-sonnet-4-5-20250929"
+description: "Create an implementation plan for integrating the RAG backend with the frontend book interface, focusing on API client implementation, CORS configuration, and UI integration."
 ---
 
 # Prompt History Record: Frontend-Backend Integration Plan

@@ -1,28 +1,7 @@
 ---
-id: 3
-title: Create Physical AI Textbook Plan
-stage: plan
-date: 2025-12-13
-surface: agent
+name: Create Physical AI Textbook Plan
 model: claude-sonnet-4-5-20250929
-feature: 001-physical-ai-humanoid
-branch: 001-physical-ai-humanoid
-user: nm
-command: /sp.plan
-labels: ["physical-ai","robotics","textbook","planning","architecture"]
-links:
-  spec: specs/001-physical-ai-humanoid/spec.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - specs/001-physical-ai-humanoid/plan.md
- - specs/001-physical-ai-humanoid/research.md
- - specs/001-physical-ai-humanoid/data-model.md
- - specs/001-physical-ai-humanoid/quickstart.md
- - specs/001-physical-ai-humanoid/contracts/rag-chatbot-api.yaml
-tests:
- - none
+description: Create comprehensive implementation plan for Physical AI & Humanoid Robotics textbook with research, data model, and API contracts.
 ---
 
 ## Prompt

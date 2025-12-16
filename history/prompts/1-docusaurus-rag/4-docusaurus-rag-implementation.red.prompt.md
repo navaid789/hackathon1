@@ -1,30 +1,7 @@
 ---
-id: 4
-title: docusaurus-rag-implementation
-stage: red
-date: 2025-12-15
-surface: agent
+name: docusaurus-rag-implementation
 model: claude-sonnet-4-5-20250929
-feature: 1-docusaurus-rag
-branch: 1-docusaurus-rag
-user: nm
-command: /sp.implement
-labels: ["implementation","docusaurus","rag","cohere","qdrant","python"]
-links:
-  spec: ../specs/1-docusaurus-rag/spec.md
-  plan: ../specs/1-docusaurus-rag/plan.md
-  tasks: ../specs/1-docusaurus-rag/tasks.md
-  ticket: null
-  adr: null
-  pr: null
-files:
- - backend/main.py
- - backend/pyproject.toml
- - backend/.env.example
- - backend/README.md
- - backend/requirements.txt
-tests:
- - No automated tests created yet
+description: Implement Docusaurus RAG pipeline with content extraction, Cohere embeddings, and Qdrant storage.
 ---
 
 ## Prompt
