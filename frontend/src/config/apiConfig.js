@@ -3,7 +3,7 @@
 
 const API_CONFIG = {
   development: {
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://127.0.0.1:8002',  // Use mock server for local dev
     timeout: 30000,
     retries: 3
   },
@@ -13,7 +13,7 @@ const API_CONFIG = {
     retries: 3
   },
   test: {
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://127.0.0.1:8002',  // Use mock server for testing
     timeout: 10000,
     retries: 1
   }
