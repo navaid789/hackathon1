@@ -75,6 +75,12 @@ uv run main.py
 python main_wrapper.py --local-mode
 ```
 
+### For Mock API Server (no external dependencies, mock responses):
+```bash
+# Start a mock server that simulates the RAG chatbot responses
+python mock_server.py
+```
+
 ### Alternative local server startup:
 ```bash
 # Direct API server startup
