@@ -358,8 +358,6 @@ def _extract_section_from_url(url: str, soup: BeautifulSoup) -> str:
             return "General"
 
 
-
-
 def chunk_text(text: str, max_length: int = 1000) -> List[str]:
     """
     Split text into smaller chunks for embedding.
@@ -408,11 +406,8 @@ def initialize_cohere_client() -> cohere.Client:
 
 def embed(text_chunks: List[str]) -> List[List[float]]:
     """
-    Generate embeddings for text chunks using Cohere with enhanced error handling and rate limiting.
+    Generate embeddings for text chunks using Cohere.
     """
-    import time
-    from cohere.errors import BadRequestError
-
     logger = logging.getLogger(__name__)
 
     # Initialize Cohere client
@@ -420,56 +415,18 @@ def embed(text_chunks: List[str]) -> List[List[float]]:
 
     try:
         # Process in batches to respect API limits (Cohere allows up to 96 texts per request)
-        batch_size = 10  # Further reduced batch size to be more conservative with trial account
+        batch_size = 50  # Using a smaller batch size to be safe
         all_embeddings = []
 
         for i in range(0, len(text_chunks), batch_size):
             batch = text_chunks[i:i + batch_size]
 
-            # Add a small delay between batches to avoid rate limiting
-            if i > 0:
-                time.sleep(1.0)  # Increased delay to be more conservative with trial account
+            response = co.embed(
+                texts=batch,
+                model="embed-multilingual-v3.0"  # Using multilingual model for broader support
+            )
 
-            # Retry logic for handling rate limits and other temporary issues
-            max_retries = 3
-            retry_count = 0
-
-            while retry_count < max_retries:
-                try:
-                    # Using a more standard model name that's available in trial accounts
-                    response = co.embed(
-                        texts=batch,
-                        model="embed-english-v3.0",  # Changed to English model which is typically more available in trials
-                        input_type="search_document"  # Added input_type which is required for newer models
-                    )
-
-                    all_embeddings.extend(response.embeddings)
-                    break  # Success, exit retry loop
-
-                except BadRequestError as e:
-                    logger.warning(f"Cohere API error (attempt {retry_count + 1}/{max_retries}): {e}")
-
-                    # Log the response body for better debugging
-                    if hasattr(e, 'body'):
-                        logger.error(f"BadRequestError body: {e.body}")
-
-                    # Check if it's a rate limit error
-                    if "rate limit" in str(e).lower() or e.status_code == 429 or "limit" in str(e).lower():
-                        wait_time = (2 ** retry_count) + 2  # Increased base wait time
-                        logger.info(f"Rate limited. Waiting {wait_time}s before retry...")
-                        time.sleep(wait_time)
-                        retry_count += 1
-                    else:
-                        # For other BadRequestErrors, log details and raise
-                        logger.error(f"BadRequestError with details: {e.body if hasattr(e, 'body') else str(e)}")
-                        raise e
-                except Exception as e:
-                    logger.error(f"Unexpected error during embedding (attempt {retry_count + 1}/{max_retries}): {e}")
-                    if retry_count >= max_retries - 1:
-                        raise e
-                    retry_count += 1
-                    wait_time = (2 ** retry_count) + 2  # Increased base wait time
-                    time.sleep(wait_time)
+            all_embeddings.extend(response.embeddings)
 
         return all_embeddings
     except Exception as e:
@@ -477,6 +434,41 @@ def embed(text_chunks: List[str]) -> List[List[float]]:
         raise
 
 
+def chunk_text(text: str, max_length: int = 1000) -> List[str]:
+    """
+    Split text into smaller chunks for embedding.
+    Uses a simple approach to split by sentences while respecting max_length.
+    """
+    import re
+
+    # Split by sentences
+    sentences = re.split(r'[.!?]+\s+', text)
+
+    chunks = []
+    current_chunk = ""
+
+    for sentence in sentences:
+        # If adding the next sentence would exceed max length
+        if len(current_chunk) + len(sentence) > max_length:
+            # If current chunk is not empty, save it
+            if current_chunk.strip():
+                chunks.append(current_chunk.strip())
+
+            # If sentence is longer than max_length, split it
+            if len(sentence) > max_length:
+                # Split long sentence into smaller parts
+                for i in range(0, len(sentence), max_length):
+                    chunks.append(sentence[i:i+max_length])
+            else:
+                current_chunk = sentence + ". "
+        else:
+            current_chunk += sentence + ". "
+
+    # Add the last chunk if it exists
+    if current_chunk.strip():
+        chunks.append(current_chunk.strip())
+
+    return chunks
 
 
 def create_collection(collection_name: str = "rag_embeddings") -> bool:
@@ -588,8 +580,7 @@ def search_similar_content(query_text: str, top_k: int = 5, collection_name: str
         # Embed the query text
         query_embedding = co.embed(
             texts=[query_text],
-            model="embed-english-v3.0",
-            input_type="search_query"  # Using query input type for search queries
+            model="embed-multilingual-v3.0"
         ).embeddings[0]
 
         # Perform similarity search
