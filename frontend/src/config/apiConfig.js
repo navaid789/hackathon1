@@ -3,17 +3,17 @@
 
 const API_CONFIG = {
   development: {
-    baseURL: 'http://127.0.0.1:8002',  // Use mock server for local dev
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for local dev
     timeout: 30000,
     retries: 3
   },
   production: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000',
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'https://your-backend-url.vercel.app',  // Use production backend
     timeout: 30000,
     retries: 3
   },
   test: {
-    baseURL: 'http://127.0.0.1:8002',  // Use mock server for testing
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for testing
     timeout: 10000,
     retries: 1
   }
