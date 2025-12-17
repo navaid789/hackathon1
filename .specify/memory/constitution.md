@@ -1,68 +1,55 @@
-<!--
-Sync Impact Report:
-- Version change: 1.0.0 → 1.1.0
-- Modified principles: All principles completely redefined based on user requirements
-- Added sections: Academic rigor, Reproducibility, Physical-first AI perspective, RAG chatbot constraints, Ethical standards
-- Removed sections: Original template placeholders
-- Templates requiring updates: ✅ Updated / ⚠ Pending
-- Follow-up TODOs: None
--->
-# Physical AI & Humanoid Robotics: Embodied Intelligence in the Real World Constitution
+# [PROJECT_NAME] Constitution
+<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
 
 ## Core Principles
 
-### I. Accuracy & Verifiability (Non-Negotiable)
-Every factual claim must be traceable to a primary or authoritative secondary source. Prefer peer-reviewed research papers, official documentation (ROS 2, NVIDIA Isaac, OpenAI), and standards bodies. No speculative or unverified claims presented as fact. All numerical benchmarks, hardware requirements, and performance claims must cite sources.
+### [PRINCIPLE_1_NAME]
+<!-- Example: I. Library-First -->
+[PRINCIPLE_1_DESCRIPTION]
+<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
 
-### II. Academic Rigor
-Maintain minimum 50% peer-reviewed sources with APA (7th edition) citation style. Each chapter must include inline citations and a references section. Claims about learning outcomes, system performance, or architectural superiority require citations.
+### [PRINCIPLE_2_NAME]
+<!-- Example: II. CLI Interface -->
+[PRINCIPLE_2_DESCRIPTION]
+<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
 
-### III. Reproducibility & Engineering Fidelity
-All technical workflows must be reproducible on Ubuntu 22.04 LTS and compatible with ROS 2 (Humble or Iron). Executable on documented hardware (RTX workstations or cloud equivalents). Code examples must be deterministic where possible, explicit about versions, dependencies, and configuration. Simulation-to-Real gaps must be explicitly discussed and mitigated.
+### [PRINCIPLE_3_NAME]
+<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
+[PRINCIPLE_3_DESCRIPTION]
+<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
 
-### IV. Physical-First AI Perspective
-Treat AI as an embodied system, not a purely digital artifact. Emphasize physics constraints, sensor noise, latency, and actuation limits. Avoid abstract AI explanations detached from real-world robotic constraints.
+### [PRINCIPLE_4_NAME]
+<!-- Example: IV. Integration Testing -->
+[PRINCIPLE_4_DESCRIPTION]
+<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
 
-### V. Clarity for a Computer Science Audience
-Assume strong programming knowledge, but no prior robotics experience. Introduce robotics concepts progressively: Middleware → Simulation → Perception → Action → Cognition. Maintain Flesch-Kincaid grade level 10–12. Use diagrams, system architecture visuals, and flowcharts wherever possible.
+### [PRINCIPLE_5_NAME]
+<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
+[PRINCIPLE_5_DESCRIPTION]
+<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
 
-### VI. Modular, Spec-Driven Structure
-Each chapter must include learning objectives, conceptual explanation, system architecture, practical implementation, and failure modes & limitations. Align chapters with ROS 2, Gazebo / Unity, NVIDIA Isaac, and Vision-Language-Action pipelines.
+### [PRINCIPLE_6_NAME]
 
-## Additional Standards
 
-### Toolchain Consistency
-Documentation platform: Docusaurus. Source control & deployment: GitHub Pages. Specification framework: Spec-Kit Plus. Authoring workflow: Claude Code. All diagrams and code must live inside the repository.
+[PRINCIPLE__DESCRIPTION]
 
-### Zero Plagiarism Policy
-0% plagiarism tolerance. No verbatim copying without quotation and citation. Paraphrasing must still include attribution. All AI-generated content must be original and synthesis-based.
+## [SECTION_2_NAME]
+<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
 
-## RAG Chatbot Constitution
+[SECTION_2_CONTENT]
+<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
 
-### Grounded Responses Only
-The embedded chatbot must answer only from the book's indexed content. Explicitly say "Not found in selected text" when applicable. No hallucinations. No external knowledge unless explicitly enabled and cited.
+## [SECTION_3_NAME]
+<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
 
-### Selected-Text Constrained Reasoning
-When users select text, responses must be strictly constrained to that selection. No inference beyond provided context. Clearly differentiate book-wide answers and selection-only answers.
-
-### Transparent System Design
-RAG architecture must be documented including embedding model, vector database (Qdrant), metadata schema, retrieval strategy. APIs built with FastAPI. Storage via Neon Serverless Postgres.
-
-## Ethical & Educational Standards
-
-### Responsible Robotics
-Explicit discussion of safety, human-robot interaction risks, and deployment limitations. Avoid anthropomorphism beyond technical necessity.
-
-### Sim-to-Real Honesty
-Clearly state when results are simulated, synthetic, or real-world validated. Discuss latency, sensor drift, and hardware failures as first-class topics.
-
-## Output & Submission Constraints
-
-### Formal Requirements
-Word count: 5,000–7,000 words. Minimum sources: 15. Final format: PDF. Embedded citations and references. Must pass fact-checking review and plagiarism detection.
+[SECTION_3_CONTENT]
+<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
 
 ## Governance
+<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-All contributions must comply with these constitutional principles. Amendments require documentation of rationale and approval by project maintainers. All PRs and reviews must verify compliance with accuracy, academic rigor, and reproducibility standards. This constitution supersedes all other practices and serves as the ultimate authority for project decisions.
+[GOVERNANCE_RULES]
+<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
-**Version**: 1.1.0 | **Ratified**: 2025-12-13 | **Last Amended**: 2025-12-13
+**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->

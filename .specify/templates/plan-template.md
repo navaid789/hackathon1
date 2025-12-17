@@ -31,12 +31,7 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- **Academic Rigor**: All technical claims must cite peer-reviewed sources or official documentation
-- **Reproducibility**: Implementation must be compatible with Ubuntu 22.04 LTS and ROS 2 (Humble/Iron)
-- **Physical-First AI**: Architecture must consider physics constraints, sensor noise, latency, and actuation limits
-- **Citation Requirements**: All numerical benchmarks and hardware requirements must include citations
-- **Zero Plagiarism**: All content must be original with proper attribution
-- **Sim-to-Real Honesty**: Clear distinction between simulated vs. real-world validated results required
+[Gates determined based on constitution file]
 
 ## Project Structure
 

@@ -86,7 +86,7 @@ class ApiClient {
     }
   }
 
-  // Specific method for querying the AI agent
+  // Specific method for querying the AI agent (backward compatibility)
   async query(queryText, context = null, threadId = null) {
     const requestBody = {
       query: queryText,
@@ -101,6 +101,64 @@ class ApiClient {
     }
 
     return await this.request('/query', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+    });
+  }
+
+  // Specific method for the new chat endpoint as per API contract
+  async chat(message, context = null, userId = null, chapterFilter = null) {
+    const requestBody = {
+      message: message,
+    };
+
+    if (context) {
+      requestBody.context = context;
+    }
+
+    if (userId) {
+      requestBody.user_id = userId;
+    }
+
+    if (chapterFilter) {
+      requestBody.chapter_filter = chapterFilter;
+    }
+
+    return await this.request('/chat', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+    });
+  }
+
+  // Specific method for searching textbook content
+  async search(query, limit = 5, chapterFilter = null) {
+    const requestBody = {
+      query: query,
+      limit: limit,
+    };
+
+    if (chapterFilter) {
+      requestBody.chapter_filter = chapterFilter;
+    }
+
+    return await this.request('/search', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+    });
+  }
+
+  // Specific method for validating responses
+  async validateResponse(response, sources, selectedText = null) {
+    const requestBody = {
+      response: response,
+      sources: sources,
+    };
+
+    if (selectedText) {
+      requestBody.selected_text = selectedText;
+    }
+
+    return await this.request('/validate-response', {
       method: 'POST',
       body: JSON.stringify(requestBody),
     });

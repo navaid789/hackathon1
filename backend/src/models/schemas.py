@@ -36,6 +36,72 @@ class QueryResponse(BaseModel):
     timestamp: datetime = Field(..., description="When the response was generated")
 
 
+class ChatRequest(BaseModel):
+    """
+    Request model for the chat endpoint as specified in the RAG chatbot API contract
+    """
+    message: str = Field(..., description="The user's message or question", example="Explain how ROS 2 handles real-time constraints")
+    context: Optional[str] = Field(None, description="The selected text context from the textbook (optional)", example="ROS 2 architecture includes real-time constraints...")
+    user_id: Optional[str] = Field(None, description="Optional user identifier for personalization")
+    chapter_filter: Optional[str] = Field(None, description="Optional filter to limit search to specific chapter")
+
+
+class ChatResponse(BaseModel):
+    """
+    Response model for the chat endpoint as specified in the RAG chatbot API contract
+    """
+    response: str = Field(..., description="The chatbot's response to the user")
+    sources: List[str] = Field(..., description="List of textbook sections/chapters used as sources")
+    grounded: bool = Field(..., description="Whether the response is properly grounded in textbook content")
+    confidence: Optional[float] = Field(None, ge=0, le=1, description="Confidence score for the response")
+
+
+class SearchRequest(BaseModel):
+    """
+    Request model for the search endpoint as specified in the RAG chatbot API contract
+    """
+    query: str = Field(..., description="The search query", example="sim-to-real transfer challenges")
+    limit: Optional[int] = Field(5, ge=1, le=20, description="Maximum number of results to return")
+    chapter_filter: Optional[str] = Field(None, description="Optional filter to search within specific chapter")
+
+
+class SearchResult(BaseModel):
+    """
+    Result model for individual search results as specified in the RAG chatbot API contract
+    """
+    content: str = Field(..., description="The relevant content excerpt")
+    chapter: str = Field(..., description="The chapter where the content appears")
+    section: str = Field(..., description="The section within the chapter")
+    relevance_score: float = Field(..., ge=0, le=1, description="Relevance score for the result")
+    page_reference: Optional[str] = Field(None, description="Page reference if available")
+
+
+class SearchResponse(BaseModel):
+    """
+    Response model for the search endpoint as specified in the RAG chatbot API contract
+    """
+    results: List[SearchResult] = Field(..., description="List of search results")
+    total_count: int = Field(..., description="Total number of results available")
+
+
+class ValidateRequest(BaseModel):
+    """
+    Request model for the validate-response endpoint as specified in the RAG chatbot API contract
+    """
+    response: str = Field(..., description="The response to validate")
+    sources: List[str] = Field(..., description="Potential sources for the response")
+    selected_text: Optional[str] = Field(None, description="Text selected by user (if any)")
+
+
+class ValidateResponse(BaseModel):
+    """
+    Response model for the validate-response endpoint as specified in the RAG chatbot API contract
+    """
+    is_valid: bool = Field(..., description="Whether the response is properly grounded")
+    issues: List[str] = Field(..., description="List of validation issues found")
+    suggestions: Optional[List[str]] = Field(None, description="Suggestions for improving grounding")
+
+
 class ErrorResponse(BaseModel):
     """
     Error response model for the API

@@ -101,17 +101,15 @@ const ChatbotUI = ({ initialThreadId = null }) => {
       // Update state to loading
       stateManager.setQueryState('LOADING');
 
-      // Make API call using connection manager
-      const response = await connectionManager.queryRequest(
+      // Make API call using new chat endpoint
+      const response = await apiClient.chat(
         queryRequest.query,
         queryRequest.context,
-        queryRequest.thread_id
+        threadId || null
       );
 
-      // Update thread ID if it was returned
-      if (response.thread_id && !threadId) {
-        setThreadId(response.thread_id);
-      }
+      // Update thread ID if it was returned (in new format, it might be in user_id)
+      // For now, we'll keep the original threadId functionality for backward compatibility
 
       // Add response to history
       const newResponse = {
@@ -119,8 +117,10 @@ const ChatbotUI = ({ initialThreadId = null }) => {
         query: queryRequest.query,
         response: response.response,
         sources: response.sources || [],
-        timestamp: response.timestamp,
-        threadId: response.thread_id
+        timestamp: new Date().toISOString(),
+        threadId: threadId || null,
+        grounded: response.grounded || false,
+        confidence: response.confidence || null
       };
 
       setResponses(prev => [...prev, newResponse]);
@@ -240,11 +240,16 @@ const ChatbotUI = ({ initialThreadId = null }) => {
                             <ul>
                               {item.sources.map((source, idx) => (
                                 <li key={idx}>
-                                  {source.url} {source.section && `(${source.section})`}
+                                  {source} {/* New format returns source strings instead of objects */}
                                 </li>
                               ))}
                             </ul>
                           </details>
+                        </div>
+                      )}
+                      {item.confidence && (
+                        <div className="confidence">
+                          Confidence: {(item.confidence * 100).toFixed(1)}%
                         </div>
                       )}
                     </div>

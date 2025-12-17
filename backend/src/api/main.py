@@ -43,9 +43,12 @@ app.add_middleware(
 app.add_middleware(LoggingMiddleware)
 
 # Import and include routes
-from src.api.routes import query, health
+from src.api.routes import query, health, chat, search, validation
 app.include_router(health.router, prefix="", tags=["health"])
 app.include_router(query.router, prefix="", tags=["query"])
+app.include_router(chat.router, prefix="", tags=["chat"])
+app.include_router(search.router, prefix="", tags=["search"])
+app.include_router(validation.router, prefix="", tags=["validation"])
 
 @app.on_event("startup")
 async def startup_event():

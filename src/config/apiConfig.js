@@ -3,7 +3,7 @@
 
 const API_CONFIG = {
   development: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for local dev
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8001',  // Use backend server for local dev
     timeout: 30000,
     retries: 3
   },
@@ -13,7 +13,7 @@ const API_CONFIG = {
     retries: 3
   },
   test: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for testing
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000',  // Use backend server for testing
     timeout: 10000,
     retries: 1
   }

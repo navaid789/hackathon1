@@ -8,10 +8,10 @@ export class ConnectionManager {
   constructor(config = {}) {
     // Default configuration
     this.config = {
-      primaryUrl: config.primaryUrl || 'http://localhost:8000',
+      primaryUrl: config.primaryUrl || 'http://127.0.0.1:8001',
       fallbackUrls: config.fallbackUrls || [
-        'http://0.0.0.0:8000',
-        'http://127.0.0.1:8000'
+        'http://localhost:8001',
+        'http://0.0.0.0:8001'
       ],
       timeout: config.timeout || 30000,
       retries: config.retries || 3,

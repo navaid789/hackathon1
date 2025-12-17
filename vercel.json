@@ -12,7 +12,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://your-backend-url.vercel.app/:path*"
+      "destination": "https://hackathon1-backend-navaid789.vercel.app/:path*"
     }
   ],
   "routes": [
@@ -45,7 +45,7 @@
       "src": "/(.*)",
       "dest": "/index.html",
       "headers": {
-        "cache-control": "public, s-maxage=0"
+        "cache-control": "public, max-age=31536000, immutable"
       }
     }
   ]

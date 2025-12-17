@@ -1,46 +1,52 @@
 // frontend/src/config/apiConfig.js
-// Configuration for API client in different environments
+// Browser-safe configuration for API client
 
-const API_CONFIG = {
-  development: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for local dev
-    timeout: 30000,
-    retries: 3
-  },
-  production: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'https://your-backend-url.vercel.app',  // Use production backend
-    timeout: 30000,
-    retries: 3
-  },
-  test: {
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8002',  // Use mock server for testing
-    timeout: 10000,
-    retries: 1
-  }
+// Use constants or environment variables injected by CRA or Vite
+// For CRA: variables must be prefixed with REACT_APP_
+// For Vite: variables are accessed via import.meta.env.VITE_*
+
+// Default base URLs
+const DEFAULT_BASE_URLS = {
+  development: 'http://127.0.0.1:8000',  // Backend runs on port 8000
+  production: 'https://hackathon1-backend-navaid789.vercel.app',  // Based on GitHub repo name
+  test: 'http://127.0.0.1:8000',
 };
 
-// Determine the current environment
+// Determine current environment in a browser-safe way
 const getEnvironment = () => {
-  if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV) {
-    return process.env.NODE_ENV;
+  // CRA sets process.env.NODE_ENV, Vite uses import.meta.env.MODE
+  if (typeof import.meta !== 'undefined' && import.meta.env?.MODE) {
+    return import.meta.env.MODE;
   }
 
-  // For browser environments, we can check for development indicators
-  if (typeof window !== 'undefined') {
-    // Docusaurus typically sets NODE_ENV in the build process
-    // For now, default to development
-    return 'development';
-  }
-
+  // Fallback default
   return 'development';
 };
 
 const currentEnv = getEnvironment();
-export const apiConfig = API_CONFIG[currentEnv] || API_CONFIG.development;
 
-// Export a function to get config based on environment
+// Base URL: first check injected env vars, then fallback to defaults
+const BASE_URL =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) ||
+  DEFAULT_BASE_URLS[currentEnv];
+
+export const apiConfig = {
+  baseURL: BASE_URL,
+  timeout: currentEnv === 'test' ? 10000 : 30000,
+  retries: currentEnv === 'test' ? 1 : 3,
+};
+
+// Function to get config for a specific environment
 export const getApiConfig = (env = currentEnv) => {
-  return API_CONFIG[env] || API_CONFIG.development;
+  const baseURL =
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) ||
+    DEFAULT_BASE_URLS[env];
+
+  return {
+    baseURL,
+    timeout: env === 'test' ? 10000 : 30000,
+    retries: env === 'test' ? 1 : 3,
+  };
 };
 
 export default apiConfig;

@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     # Qdrant collection name
     qdrant_collection_name: str = "rag_embeddings"
 
+    # Docusaurus site configuration (for RAG pipeline)
+    docusaurus_base_url: str = "https://hackathon1-five-taupe.vercel.app/"
+
     class Config:
         env_file = ".env"
 
